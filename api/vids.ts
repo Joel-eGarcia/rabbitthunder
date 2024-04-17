@@ -86,7 +86,7 @@ export default async (req: any, res: any) => {
   
   try {
     const [req] = await Promise.all([
-      page.waitForRequest(req => req.url().includes('.m3u8'), { timeout: 20000 }),
+      page.waitForRequest(req => req.url().includes('/mediainfo/'), { timeout: 20000 }),
       page.goto(`https://vid41c.site/e/${id}`, { waitUntil: 'domcontentloaded' }),
     ]);
   } catch (error) {
