@@ -71,7 +71,7 @@ export default async (req: any, res: any) => {
 
   // Set headers,else wont work.
   await page.setExtraHTTPHeaders({ 'Referer': 'https://mcloud.bz/e/${id}' });
-  
+  console.log('https://mcloud.bz/e/${id}');
   const logger:string[] = [];
   const finalResponse:{source:string,subtitle:string[]} = {source:'',subtitle:[]}
   
@@ -85,6 +85,7 @@ export default async (req: any, res: any) => {
   });
   
   try {
+    console.log(`https://mcloud.bz/e/${id});
     const [req] = await Promise.all([
       page.waitForRequest(req => req.url().includes('.m3u8'), { timeout: 20000 }),
       page.goto(`https://mcloud.bz/e/${id}`, { waitUntil: 'domcontentloaded' }),
