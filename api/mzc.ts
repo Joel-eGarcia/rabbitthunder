@@ -47,7 +47,7 @@ export default async (req: any, res: any) => {
   if (!body) return res.status(400).end(`No body provided`)
   if (typeof body === 'object' && !body.id) return res.status(400).end(`No url provided`)
   
-  const id = body.id;
+  const id = decodeURI(body.id);
   const isProd = process.env.NODE_ENV === 'production'
 
   // create browser based on ENV
@@ -71,7 +71,7 @@ export default async (req: any, res: any) => {
 
   // Set headers,else wont work.
   await page.setExtraHTTPHeaders({ 'Referer': 'https://mcloud.bz/e/${id}' });
-  console.log('https://mcloud.bz/e/${id}');
+  
   const logger:string[] = [];
   const finalResponse:{source:string,subtitle:string[]} = {source:'',subtitle:[]}
   
@@ -85,7 +85,6 @@ export default async (req: any, res: any) => {
   });
   
   try {
-    console.log(`https://mcloud.bz/e/${id});
     const [req] = await Promise.all([
       page.waitForRequest(req => req.url().includes('.m3u8'), { timeout: 20000 }),
       page.goto(`https://mcloud.bz/e/${id}`, { waitUntil: 'domcontentloaded' }),
