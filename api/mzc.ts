@@ -73,12 +73,12 @@ export default async (req: any, res: any) => {
   await page.setExtraHTTPHeaders({ 'Referer': 'https://thetvapp.to/','User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0' });
   
   const logger:string[] = [];
-  const finalResponse: string = ''
+  const finalResponse:{source:string} = {source:''}
   
   page.on('request', async (interceptedRequest) => {
     await (async () => {
       logger.push(interceptedRequest.url());
-      if (interceptedRequest.url().includes('.m3u8')) finalResponse = interceptedRequest.url();
+      if (interceptedRequest.url().includes('.m3u8')) finalResponse.source = interceptedRequest.url();
       interceptedRequest.continue();
     })();
   });
@@ -95,8 +95,7 @@ export default async (req: any, res: any) => {
 
   // Response headers.
   res.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate')
- // res.setHeader('Content-Type', 'application/json')
-  res.setHeader('Content-Type', 'text/html');
+  res.setHeader('Content-Type', 'application/json')
   // CORS
   // res.setHeader('Access-Control-Allow-Headers', '*')
   res.setHeader('Access-Control-Allow-Credentials', true)
@@ -107,5 +106,5 @@ export default async (req: any, res: any) => {
     'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
   )
   console.log(finalResponse);
-  res.end(finalResponse);
+  res.json(finalResponse);
 };
