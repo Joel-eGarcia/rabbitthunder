@@ -73,12 +73,12 @@ export default async (req: any, res: any) => {
   await page.setExtraHTTPHeaders({ 'Referer': 'https://thetvapp.to/','User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64; rv:109.0) Gecko/20100101 Firefox/115.0' });
   
   const logger:string[] = [];
-  const finalResponse:{source:string} = {source:''}
+  const finalResponse: string = '';
   
   page.on('request', async (interceptedRequest) => {
     await (async () => {
-      logger.push(interceptedRequest.url());
-      if (interceptedRequest.url().includes('.m3u8')) finalResponse.source = interceptedRequest.url();
+     // logger.push(interceptedRequest.url());
+      if (interceptedRequest.url().includes('.m3u8')) finalResponse = interceptedRequest.url();
       interceptedRequest.continue();
     })();
   });
@@ -105,6 +105,6 @@ export default async (req: any, res: any) => {
     'Access-Control-Allow-Headers',
     'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
   )
-  console.log(finalResponse);
-  res.json(finalResponse);
+  //console.log(finalResponse);
+  res.send(finalResponse);
 };
