@@ -1,0 +1,8 @@
+{
+    "watch": [
+        "api"
+    ],
+    "ext": ".ts",
+    "ignore": [],
+    "exec": "npx ts-node ./api/mzc.ts"
+}
