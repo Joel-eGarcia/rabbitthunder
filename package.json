@@ -2,8 +2,11 @@
   "name": "rabbitthunder",
   "version": "1.0.0",
   "description": "A rabbit stream extractor based on puppeteer by cool-dev-guy.",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "build": "tsc",
+    "start": "node public/index.js"
   },
   "keywords": [],
   "author": "cool-dev-guy",
