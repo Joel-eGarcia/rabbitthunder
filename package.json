@@ -5,8 +5,8 @@
   "main": "mzc.js",
   "scripts": {
     "dev": "nodemon",
-    "build": "npm install && npx tsup src --out-dir public",
-    "start": "node public/mzc.js"
+    "build": "tsc",
+    "start": "node ./public/mzc.js"
   },
   "keywords": [],
   "author": "cool-dev-guy",
