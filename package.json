@@ -2,11 +2,11 @@
   "name": "rabbitthunder",
   "version": "1.0.0",
   "description": "A rabbit stream extractor based on puppeteer by cool-dev-guy.",
-  "main": "index.js",
+  "main": "mzc.js",
   "scripts": {
     "dev": "nodemon",
     "build": "tsc",
-    "start": "node public/index.js"
+    "start": "node public/mzc.js"
   },
   "keywords": [],
   "author": "cool-dev-guy",
